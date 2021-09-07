@@ -1,0 +1,52 @@
+{% extends 'myintern/index.html' %} {% load static %} {% block heading %}
+
+{% endblock heading %}
+
+
+{% block content %}
+<h1>Welcome</h1> <br>
+<h2>Register</h2>
+<br><br>
+
+
+<div class=" container-fluid col-12">
+<div class=" col-4 ">
+
+{% if messages %}
+{% for i in messages %}
+
+<p {% if i.tags %} class="alert alert-{{i.tags}}" {% endif %} mb-5>{{i}}</p>
+
+{% endfor %}
+{% endif %}
+
+
+
+<form action="" method="POST" novalidate>
+{% csrf_token %}
+{% for i in form %}
+
+  <div class="form-group">
+  {{i.label_tag}}  {{i}} <small class="text-danger"> {{i.errors|striptags}} </small>
+  </div>
+
+  {% endfor %}
+<br>
+
+ <button style="height:2em;width:6em; border:none; background-color:#5f76e8; color:white;"  class="" type="submit">Register</button>
+
+{% if form.non_field_errors %}
+  {% for i in form.non_field_errors %}
+  <p class="alert alert-danger my-3">{{i}}</p>
+  {% endfor %}
+  {% endif %}
+
+</form>
+<br>
+<p>Already have an account ? <a href="{% url 'loginName' %}">Login here!</a></p>
+</div>
+
+<div class="col-8">
+</div>
+</div>
+{% endblock content %}
